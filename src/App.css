@@ -68,12 +68,15 @@
 }
 .hide{
     opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 .visible{
     transition: opacity 0.5s ease-in-out;
     opacity: 1;
 }
 
-/* pacman */
+.pacman{
+    
+}
 
 

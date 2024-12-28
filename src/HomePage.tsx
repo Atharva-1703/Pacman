@@ -1,7 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ImageComponent from "./ImageComponent";
 
-function HomePage() {
+interface GameStartProps {
+  setStartGame: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const HomePage:React.FC<GameStartProps> = ({setStartGame}) => {
+  const handleStart = () => {
+    setStartGame(true);
+  }
+
   const handlePlay = () => {
     document.getElementById("play")?.classList.add("opacity-0");
     setTimeout(() => {
@@ -27,31 +35,31 @@ function HomePage() {
     setTimeout(() => {
       document.getElementById("title")?.classList.add("opacity-0");
       document.getElementById("second-dash")?.classList.add("animate-fadeOut");
-      startText?.classList.add("opacity-100");
+      startText?.classList.toggle("opacity-100");
     }, 4000);
     setTimeout(() => {
-      pac?.classList.add("scale-[0.8]");
-      controls?.classList.toggle("opacity-100");
+      pac?.classList.add("scale-[0.7]");
       startText?.classList.add("translate-y-[180px]");
-      startText?.classList.toggle("h-[108px]");
-      startText?.classList.toggle("text-[24px]");
-      startText?.classList.toggle("leading-[36px]");
-    }, 5000);
+      startText?.classList.toggle("h-[107px]");
+      startText?.classList.toggle("text-[25px]");
+      startText?.classList.toggle("leading-[37px]");
+      controls?.classList.toggle("opacity-100");
+    }, 5500);
     setTimeout(() => {
       controls?.classList.add("translate-y-[-50px]");
       pac?.classList.toggle("translate-y-[-290px]");
       startText?.classList.toggle("opacity-100");
       document.getElementById('note')?.classList.toggle('opacity-100');
+      document.getElementById('start')?.classList.remove('hidden');
       document.getElementById('start')?.classList.toggle('opacity-100');
-    }, 6500);
+    }, 7000);
   }
   return (
     <>
     {/* Background */}
       <div
         id="background"
-        className="bg-[url(/resources/images/bg.png)] bg-175%
-     w-full h-full bg-no-repeat relative flex justify-center items-center overflow-hidden bg-left-bottom transition-all duration-1000 ease-linear"
+        className="bg-[url(/resources/images/bg.png)] bg-175% w-full h-screen bg-no-repeat relative flex justify-center items-center overflow-hidden bg-left-bottom transition-all duration-1000 ease-linear"
       >
         <div
           id="title"
@@ -69,19 +77,18 @@ function HomePage() {
         <div id="dash-line" className="opacity-0">
           <hr
             id="first-dash"
-            className="absolute w-[49%] top-[480px] h-0 border-[7.5px]  border-dashed border-[#FFEA00]  inline left-0 "
+            className="absolute w-[49%] top-[541px] h-0 border-[7.5px]  border-dashed border-[#FFEA00]  inline left-0 "
           />
           <hr
             id="second-dash"
-            className="absolute w-[49%] top-[480px] h-0 border-[7.5px]   border-dashed border-[#FFEA00]  right-0"
+            className="absolute w-[49%] top-[541px] h-0 border-[7.5px]   border-dashed border-[#FFEA00]  right-0"
           />
         </div>
       </div>
 
     {/* Controls */}
-      <div
-        id="controls"
-        className="absolute top-[50px] left-[140px] w-full transition-all duration-1000 ease-linear opacity-0"
+      <div id="controls"
+        className="absolute top-[110px] left-[140px] w-full transition-all duration-1000 ease-linear opacity-0"
       >
         <div
           className="absolute font-poppins text-white font-black text-center top-0 left-0 text-[24px] leading-9 "
@@ -116,7 +123,7 @@ function HomePage() {
       {/* Pacman */}
       <div
         id="pac"
-        className="absolute top-[370px] left-[-178px]  transition  duration-1000 ease-linear"
+        className="absolute top-[435px]   transition  duration-1000 left-[-178px] ease-linear"
       >
         <ImageComponent
           src="/resources/images/pacman.png"
@@ -125,23 +132,27 @@ function HomePage() {
         />
       </div>
 
-      <div
-        id="start-text"
-        className="absolute w-[291px] h-[216px] text-center text-[36px] leading-[54px] font-poppins -z-30 opacity-0  not-italic font-black text-white text-2xl left-[51px] top-[400px] transition  duration-1000 ease-linear"
+      {/* Start text */}
+      <div id="start-text"
+        className="absolute w-[291px] h-[216px] text-center text-[36px] leading-[54px] font-poppins opacity-0  not-italic font-black text-white text-2xl left-[51px] top-[488px] transition  duration-1000 ease-linear"
+        
       >
         Move Pac-man to go towards the right answer
       </div>
-      <div
-        id="note"
-        className="absolute w-[291px] h-[144px] text-center text-[32px] leading-[48px] font-poppins opacity-0  not-italic font-black text-white text-2xl left-[51px] top-[400px] transition  duration-1000 ease-linear"
+
+      {/* Note */}
+      <div id="note"
+        className="absolute w-[291px] h-[144px] text-center text-[32px] leading-[48px] font-poppins opacity-0  not-italic font-black text-white text-2xl left-[51px] top-[531px] transition  duration-1000 ease-linear"
       >
         Pac-man cannot go back so choose wisely
       </div>
       <div>
+
+        {/* Start Game */}
       <button
           id="start"
-          className="font-seymour w-[197px] h-[75px] bottom-[40px] left-[98px] rounded-[20px] bg-[#0058fd] absolute flex opacity-0 justify-center items-center font-normal text-2xl text-white not-italic transition-all duration-1000 ease-linear " 
-          onClick={handlePlay}
+          className="font-seymour w-[197px] h-[75px] bottom-[40px] left-[98px] rounded-[20px] bg-[#0058fd] absolute flex hidden opacity-0 justify-center items-center font-normal text-2xl text-white not-italic transition-all duration-1000 ease-linear " 
+          onClick={handleStart}
         >
           Start
         </button>

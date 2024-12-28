@@ -18,7 +18,7 @@ export default {
             right: "-452px",
           },
           "100%": {
-            top: "110px",
+            top: "184px",
             right: "calc(50% - 452px / 2)",
           },
         },

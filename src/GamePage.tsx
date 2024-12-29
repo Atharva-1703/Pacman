@@ -1,5 +1,8 @@
 import React from 'react'
 import ImageComponent from './ImageComponent'
+import QuestionCard from './QuestionCard'
+import Path from './Path'
+import PathMaze from './PathMaze'
 
 const GamePage = () => {
   return (
@@ -18,8 +21,9 @@ const GamePage = () => {
         </div>
         </div>
 
-        <div id='question' className='absolute h-[156px] w-[323px] left-[35px] top-[165px] bg-[#0058fd] rounded-[20px]'></div>
-
+        <QuestionCard  />
+        
+        <PathMaze/>
 
         <div id="pac" className='absolute  left-[37px] top-[590px]'>
             <ImageComponent src='/resources/images/pacman.png' alt='pac' className='w-[44px] h-[44px]' />

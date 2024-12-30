@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ImageComponent from "./ImageComponent";
+import ImageComponent from "./components/ImageComponent";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -128,6 +128,7 @@ const HomePage = () => {
       >
         Pac-man cannot go back so choose wisely
       </div>
+      
       <div>
         {/* Start Game */}
         <button

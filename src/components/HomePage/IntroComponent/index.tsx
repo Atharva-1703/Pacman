@@ -1,6 +1,6 @@
 import React from 'react'
-import ImageComponent from '../ImageComponent'
-import ButtonComponent from '../ButtonComponent'
+import ImageComponent from '../../ImageComponent'
+import ButtonComponent from '../../ButtonComponent'
 
 
 

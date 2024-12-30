@@ -1,5 +1,5 @@
 import React from 'react'
-import ImageComponent from '../ImageComponent'
+import ImageComponent from '../../ImageComponent'
 
 const OptionCard = ({houseClass,optionClass}: {houseClass?: string, optionClass?: string}) => {
   return (

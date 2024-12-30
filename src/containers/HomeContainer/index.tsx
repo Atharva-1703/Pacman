@@ -1,7 +1,7 @@
 import React from 'react'
 import HomeView from '../../views/HomeView'
 import { useNavigate } from 'react-router-dom';
-import { animateIntro } from '../../components/IntroAnimation/animate';
+import { animateIntro } from '../../components/HomePage/IntroAnimation/animate';
 
 const HomeContainer = () => {
     const navigate = useNavigate();

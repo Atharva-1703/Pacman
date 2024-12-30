@@ -1,9 +1,9 @@
 import React from "react";
 import ImageComponent from "../../components/ImageComponent";
-import ControlsComponent from "../../components/ControlsComponent";
-import TextComponent from "../../components/TextComponent";
+import ControlsComponent from "../../components/HomePage/ControlsComponent";
+import TextComponent from "../../components/HomePage/TextComponent";
 import ButtonComponent from "../../components/ButtonComponent";
-import IntroComponent from "../../components/IntroComponent";
+import IntroComponent from "../../components/HomePage/IntroComponent";
 
 interface HomeViewProps {
   handlePlay: () => void;

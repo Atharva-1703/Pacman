@@ -1,8 +1,8 @@
 import React from 'react'
 import ImageComponent from './components/ImageComponent'
-import QuestionCard from './components/QuestionCard'
-import PathMaze from './components/PathMazeComponent'
-import OptionCard from './components/OptionCard'
+import QuestionCard from './components/GamePage/QuestionCard'
+import PathMaze from './components/GamePage/PathMazeComponent'
+import OptionCard from './components/GamePage/OptionCard'
 
 const GamePage = () => {
   return (

@@ -1,12 +1,21 @@
 import React from 'react'
 import ImageComponent from '../../ImageComponent'
 
-const OptionCard = ({houseClass,optionClass}: {houseClass?: string, optionClass?: string}) => {
+const OptionCard = ({optionClass,option,id,imageInvert}: {optionClass?: string,option?: string,id?: string ,imageInvert?: boolean}) => {
   return (
-    <div id="option1" className=''>
-        <ImageComponent src='resources/images/option.png' alt='option' className={`absolute w-[147px] h-[67px] ${optionClass}`}/>
-        <ImageComponent src='resources/images/pacHouse.png'alt='Pac House'className={`absolute w-[92px] h[94px] ${houseClass}`} />
-    </div>
+    <div id={id}className={`absolute w-[147px] h-[67px] ${optionClass}`}>
+      <div className='relative'>
+
+    <ImageComponent src='resources/images/option.png' alt='option' className={` ${imageInvert?'-scale-x-100':''}`}/>
+    <p className={`absolute text-center break-words whitespace-normal overflow-hidden inset-0 font-poppins font-bold leading-[30px] flex justify-center items-center`}>
+        {option}
+      </p>
+      </div>
+    
+    
+    
+</div>
+
   )
 }
 

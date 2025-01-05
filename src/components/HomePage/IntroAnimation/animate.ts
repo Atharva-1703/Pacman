@@ -25,7 +25,8 @@ export function animateIntro(): void {
         startText?.classList.toggle("opacity-100");
       }},
     { time: 5500, actions: () => {
-        pac?.classList.toggle("scale-[0.7]");
+        pac?.classList.remove("scale-[1.4]");
+        pac?.classList.add("scale-[0.7]")
         startText?.classList.remove('text-[36px]')
         startText?.classList.toggle("text-[27px]");
         startText?.classList.remove("leading-[54px]");

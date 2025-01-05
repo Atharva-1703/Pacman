@@ -28,19 +28,18 @@ const GameView = () => {
       const now = Date.now();
       
       if (lastKeyPressTime.current === null || now - lastKeyPressTime.current >= 1000) {
-        lastKeyPressTime.current = now;  
-        
+        lastKeyPressTime.current = now;   
         if (key) {
           if (startOption1.current) {
             handleOption1(key);
           }
-          if (startOption2.current) {
+          else if (startOption2.current) {
             handleOption2(key);
           }
-          if (startOption3.current) {
+          else if (startOption3.current) {
             handleOption3(key);
           }
-          if (startOption4.current) {
+          else if (startOption4.current) {
             handleOption4(key);
           } else {
             handleCommonPath(key);
@@ -90,60 +89,85 @@ const GameView = () => {
   
 
   const handleOption1=(key:string)=>{
-    
     if(pacRef.current && key==="ArrowDown" && cntRef.current===0 ){
-     pacRef.current.classList.add("translate-y-[70px]");
-     cntRef.current++;
+      pacRef.current.classList.add('rotate-90')
+      setTimeout(() => {
+        
+        pacRef.current?.classList.add("translate-y-[70px]");
+        cntRef.current++;
+      }, 500);
     }
     if(pacRef.current && key==="ArrowLeft" && cntRef.current===1){
-      pacRef.current.classList.remove("translate-x-[50px]");
-      pacRef.current.classList.add("translate-x-[-20px]");
-      cntRef.current++;
+      pacRef.current.classList.remove("rotate-90");
+      pacRef.current.classList.add("scale-x-[-1]");
+      setTimeout(() => {
+        pacRef.current?.classList.remove("translate-x-[50px]");
+        pacRef.current?.classList.add("translate-x-[-20px]");
+        cntRef.current++;
+      }, 500);
     }
     if(pacRef.current && key==="ArrowDown" && cntRef.current===2){
-      pacRef.current.classList.remove("translate-y-[70px]");
-      pacRef.current.classList.add("translate-y-[140px]");
-      cntRef.current++;
+      pacRef.current.classList.add("rotate-[-90deg]");
+      setTimeout(() => {
+        
+        pacRef.current?.classList.remove("translate-y-[70px]");
+        pacRef.current?.classList.add("translate-y-[140px]");
+        cntRef.current++;
+      },500)
     }
   }
 
   const handleOption2=(key:string)=>{
-    if(pacRef.current && key==="ArrowUp" && cntRef.current===0 ){
-      pacRef.current.classList.add("translate-y-[-130px]");
-      cntRef.current++;
+    if(pacRef.current && key==="ArrowUp" && cntRef.current===0 ){ 
+      pacRef.current.classList.add("rotate-[-90deg]")
+      setTimeout(() => {
+        pacRef.current?.classList.add("translate-y-[-130px]");
+        cntRef.current++;
+      }, 500);
     }
     if(pacRef.current && key==="ArrowLeft" && cntRef.current===1 ){
-      console.log("1");
+      pacRef.current.classList.remove("rotate-[-90deg]");
+      pacRef.current.classList.add("scale-x-[-1]");
+      setTimeout(() => {
+        pacRef.current?.classList.remove("translate-x-[130px]");
+        pacRef.current?.classList.add("translate-x-[10px]");
+        cntRef.current++;
+      }, 500);
       
-      pacRef.current.classList.remove("translate-x-[130px]");
-      pacRef.current.classList.add("translate-x-[10px]");
-      cntRef.current++;
     }
   }
   
   const handleOption3=(key:string)=>{
     if(pacRef.current && key==="ArrowUp" && cntRef.current===0 ){
-      pacRef.current.classList.add("translate-y-[-90px]");
-      cntRef.current++;
+      pacRef.current.classList.add("-rotate-90")
+      setTimeout(() => {  
+        pacRef.current?.classList.add("translate-y-[-90px]");
+        cntRef.current++;
+      },500)
     }
     if(pacRef.current && key==="ArrowRight" && cntRef.current===1 ){
-      
-      pacRef.current.classList.add("translate-x-[250px]");
-      cntRef.current++;
+      pacRef.current.classList.remove("-rotate-90");
+      setTimeout(() => {
+        pacRef.current?.classList.add("translate-x-[250px]");
+        cntRef.current++;
+      }, 500);
     }
   }
 
   const handleOption4=(key:string)=>{
     if(pacRef.current && key==="ArrowDown" && cntRef.current===0 ){
-      console.log("h");
-      
-      pacRef.current.classList.add("translate-y-[130px]");
+      pacRef.current.classList.add("rotate-90")
+      setTimeout(() => {
+        pacRef.current?.classList.add("translate-y-[130px]");
       cntRef.current++;
+      }, 500);
     }
     if(pacRef.current && key==="ArrowRight" && cntRef.current===1 ){
-      
-      pacRef.current.classList.add("translate-x-[300px]");
+      pacRef.current.classList.remove("rotate-90");
+      setTimeout(() => {
+        pacRef.current?.classList.add("translate-x-[290px]");
       cntRef.current++;
+      }, 500);
     }
   }
 

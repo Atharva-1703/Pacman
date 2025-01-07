@@ -19,7 +19,6 @@ const HomeContainer = () => {
   
       // Add animation classes to elements
       document.getElementById("dash-line")?.classList.add("animate-fadeIn");
-      // animatePac();
       animateIntro();
     };
   

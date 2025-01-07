@@ -14,14 +14,26 @@ const GameView = () => {
   const lastKeyPressTime = useRef<number | null>(null);
   const pacRef = useRef<HTMLDivElement | null>(null);
   const cntRef = useRef(0);
-
-
-  let movIdx = 0;
   const movePac = [
     "translate-x-[130px]",
     "translate-x-[190px]",
     "translate-x-[250px]",
   ];
+  const pathMaze=[
+    'path-1',
+    'path-2',
+    'path-3'
+  ]
+  const option=[
+    'option1',
+    'option2',
+    'option3',
+    'option4'
+  ]
+  const correctOption=1;
+  const correctOpt = document.getElementById(option[correctOption])?.children[0] as HTMLImageElement;
+
+  let movIdx = 0;
 
   useEffect(() => {
     const stopListening = listenForArrowKeys((key) => {
@@ -50,9 +62,44 @@ const GameView = () => {
    
     return () => stopListening();
   }, []);
-  
 
-  // console.log(keyPressed);
+
+
+  const handleAfterOptions=(movIdx:number)=>{
+    setTimeout(() => {
+      handleAnswerCheck(movIdx);
+      pacRef.current?.classList.remove("scale-x-[-1]");
+    }, 1000);
+    setTimeout(() => {
+      pacRef.current?.classList.add("translate-x-[140px]");
+      
+    }, 2000);
+    setTimeout(() => {
+      
+      pacRef.current?.classList.add("rotate-90");
+    }, 3000);
+    setTimeout(() => {
+      pacRef.current?.classList.remove("translate-y-[-130px]");
+    }, 4000);
+    setTimeout(() => {
+      pacRef.current?.classList.remove("rotate-90");
+      pacRef.current?.classList.add("scale-x-[-1]");
+    }, 5000);
+    
+  }
+
+
+  const handleAnswerCheck=(movIdx:number)=>{
+    const correctOpt = document.getElementById(option[correctOption])?.children[0] as HTMLImageElement;
+   if(correctOpt){ correctOpt.src="/resources/images/right.png";}
+    if(movIdx!==correctOption){
+      const wrongOpt=document.getElementById(option[movIdx])?.children[0] as HTMLImageElement | null;
+      if(wrongOpt){wrongOpt.src="/resources/images/wrong.png"}
+      return false;
+    }
+    return true;
+  }
+  
   
   const handleCommonPath = (key: string) => {
     if (pacRef.current && key === "ArrowRight" && movIdx < movePac.length) {
@@ -63,6 +110,7 @@ const GameView = () => {
         pacRef.current.classList.remove("translate-x-[50px]");
       }
       pacRef.current.classList.add(movePac[movIdx]);
+      document.getElementById(pathMaze[movIdx])?.classList.add("animate-fadeOut");
       movIdx++;
     }
     else if (pacRef.current && key === "ArrowDown" && movIdx <= movePac.length) {
@@ -92,7 +140,7 @@ const GameView = () => {
     if(pacRef.current && key==="ArrowDown" && cntRef.current===0 ){
       pacRef.current.classList.add('rotate-90')
       setTimeout(() => {
-        
+        document.getElementById('opt1-1')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-y-[70px]");
         cntRef.current++;
       }, 500);
@@ -101,6 +149,7 @@ const GameView = () => {
       pacRef.current.classList.remove("rotate-90");
       pacRef.current.classList.add("scale-x-[-1]");
       setTimeout(() => {
+        document.getElementById('opt1-2')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.remove("translate-x-[50px]");
         pacRef.current?.classList.add("translate-x-[-20px]");
         cntRef.current++;
@@ -109,10 +158,11 @@ const GameView = () => {
     if(pacRef.current && key==="ArrowDown" && cntRef.current===2){
       pacRef.current.classList.add("rotate-[-90deg]");
       setTimeout(() => {
-        
+        document.getElementById('opt1-3')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.remove("translate-y-[70px]");
         pacRef.current?.classList.add("translate-y-[140px]");
         cntRef.current++;
+        handleAfterOptions(movIdx);
       },500)
     }
   }
@@ -121,6 +171,7 @@ const GameView = () => {
     if(pacRef.current && key==="ArrowUp" && cntRef.current===0 ){ 
       pacRef.current.classList.add("rotate-[-90deg]")
       setTimeout(() => {
+        document.getElementById('opt2-1')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-y-[-130px]");
         cntRef.current++;
       }, 500);
@@ -129,9 +180,11 @@ const GameView = () => {
       pacRef.current.classList.remove("rotate-[-90deg]");
       pacRef.current.classList.add("scale-x-[-1]");
       setTimeout(() => {
+        document.getElementById('opt2-2')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.remove("translate-x-[130px]");
         pacRef.current?.classList.add("translate-x-[10px]");
         cntRef.current++;
+        handleAfterOptions(movIdx);
       }, 500);
       
     }
@@ -141,6 +194,7 @@ const GameView = () => {
     if(pacRef.current && key==="ArrowUp" && cntRef.current===0 ){
       pacRef.current.classList.add("-rotate-90")
       setTimeout(() => {  
+        document.getElementById('opt3-1')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-y-[-90px]");
         cntRef.current++;
       },500)
@@ -148,8 +202,10 @@ const GameView = () => {
     if(pacRef.current && key==="ArrowRight" && cntRef.current===1 ){
       pacRef.current.classList.remove("-rotate-90");
       setTimeout(() => {
+        document.getElementById('opt3-2')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-x-[250px]");
         cntRef.current++;
+        handleAfterOptions(movIdx);
       }, 500);
     }
   }
@@ -158,6 +214,7 @@ const GameView = () => {
     if(pacRef.current && key==="ArrowDown" && cntRef.current===0 ){
       pacRef.current.classList.add("rotate-90")
       setTimeout(() => {
+        document.getElementById('opt4-1')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-y-[130px]");
       cntRef.current++;
       }, 500);
@@ -165,8 +222,10 @@ const GameView = () => {
     if(pacRef.current && key==="ArrowRight" && cntRef.current===1 ){
       pacRef.current.classList.remove("rotate-90");
       setTimeout(() => {
+        document.getElementById('opt4-2')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-x-[290px]");
       cntRef.current++;
+      handleAfterOptions(movIdx);
       }, 500);
     }
   }
@@ -204,20 +263,21 @@ const GameView = () => {
 
       <OptionCard
         id="option1"
+        optionClass=" top-[700px] left-[40px]"
+        option="Hippopotamus"
+        />
+      <OptionCard
+        id="option2"
         optionClass=" top-[420px] left-[33px]"
         option="Blue Whale"
       />
       <OptionCard
-        id="option2"
+        id="option3"
         optionClass=" top-[430px] right-[20px]"
         option="Shark"
         imageInvert
       />
-      <OptionCard
-        id="option3"
-        optionClass=" top-[700px] left-[40px]"
-        option="Hippopotamus"
-      />
+      
       <OptionCard
         id="option4"
         optionClass=" top-[740px] right-[60px]"

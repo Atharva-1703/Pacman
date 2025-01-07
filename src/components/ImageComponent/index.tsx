@@ -7,9 +7,9 @@ const ImageComponent = ({src, alt, className}: {src: string, alt: string, classN
     
   return (
     
-    <div>
+    
       <img src={src} alt={alt} className={className}/>
-    </div>
+   
   )
 }
 

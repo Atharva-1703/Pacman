@@ -8,7 +8,7 @@ const IntroComponent = ({handleFunction}: {handleFunction: () => void}) => {
   return (
     <div
         id="background"
-        className="bg-[url(/resources/images/bg.png)] bg-175% w-full h-screen bg-no-repeat relative flex justify-center items-center overflow-hidden bg-left-bottom transition-opacity duration-1000 ease-linear"
+        className="bg-[url(/resources/images/bg.png)] bg-175% w-full h-screen bg-no-repeat relative flex justify-center items-center  overflow-hidden bg-left-bottom transition-opacity duration-1000 ease-linear"
       >
         
         <div
@@ -17,7 +17,7 @@ const IntroComponent = ({handleFunction}: {handleFunction: () => void}) => {
         >
           Pac-man Run
         </div>
-        <ButtonComponent id="play" handleFunction={handleFunction} text="Play" className="bottom-[0] left-[-197px] w-[197px] h-[75px] animate-slideRight" /> 
+        <ButtonComponent id="play" handleFunction={handleFunction} text="Play" className="bottom-[0] z-10 left-[-197px] w-[197px] h-[75px] animate-slideRight" /> 
         
         <div id="dash-line" className="opacity-0">
           <hr

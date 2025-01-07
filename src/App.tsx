@@ -2,7 +2,7 @@ import AppRoutes from "./Routes";
 
 function App() {
   return (
-    <div className="relative w-full h-[852px] flex justify-center items-center  bg-black">
+    <div className="relative  h-[852px] flex justify-center bg-black ">
       <AppRoutes/>
     </div>
   );

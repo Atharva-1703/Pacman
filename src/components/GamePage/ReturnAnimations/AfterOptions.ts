@@ -10,15 +10,13 @@ const home = [
   "translate-x-[250px]",
 ];
 
-interface GameActionParams {
-  movIdx: number;
-  pacRef: React.RefObject<HTMLDivElement>;
-  correctOption: number;
-  setShowCherry: React.Dispatch<React.SetStateAction<boolean>>;
-}
+
 
 export const handleAfterOptions = (
-  {movIdx,pacRef,correctOption,setShowCherry}:GameActionParams
+  movIdx: number,
+  pacRef: React.RefObject<HTMLDivElement>,
+  correctOption: number,
+  setShowCherry: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const returnActions = ReturnActions(pacRef);
   const ghostActions = GhostActions(pacRef);
@@ -35,11 +33,23 @@ export const handleAfterOptions = (
   returnActions[movIdx]();
   setTimeout(() => {
     if (isCorrect) {
-      // home[movIdx]();
-      pacRef.current?.classList.remove("duration-500");
+
+      if(movIdx>0)
+      {pacRef.current?.classList.remove("duration-500");
       pacRef.current?.classList.add("duration-1000");
+      }
       pacRef.current?.classList.remove(home[movIdx]);
-    }
+      if(movIdx===0){
+        setTimeout(() => {
+          pacRef.current?.classList.remove("-rotate-90")
+          pacRef.current?.classList.add("scale-x-[-1]");
+        }, 500);
+        setTimeout(() => {
+          pacRef.current?.classList.remove("translate-x-[50px]")
+        }, 1000);
+      }
+    
+  }
   }, 3500);
 };
 

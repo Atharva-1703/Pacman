@@ -14,8 +14,8 @@ const ReturnActions = (pacRef: React.RefObject<HTMLDivElement>) => [
       pacRef.current?.classList.remove("rotate-[-90deg]");
     }, 2000);
     setTimeout(() => {
+      pacRef.current?.classList.remove("translate-x-[-20px]");
       pacRef.current?.classList.add("translate-x-[50px]");
-        pacRef.current?.classList.remove("translate-x-[-20px]");
     }, 2500);
     setTimeout(() => {
       pacRef.current?.classList.add("-rotate-90");

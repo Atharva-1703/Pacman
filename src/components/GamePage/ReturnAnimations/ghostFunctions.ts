@@ -1,3 +1,5 @@
+import { messageMove } from "./returnFunctions";
+
 const GhostActions = (pacRef: React.RefObject<HTMLDivElement>) => [
     // ? return from 1st option
      ()=>{
@@ -10,6 +12,8 @@ const GhostActions = (pacRef: React.RefObject<HTMLDivElement>) => [
         }, 2200);
         setTimeout(() => {
           pacRef.current?.classList.add("animate-fadeOut")
+          messageMove("duration-500","duration-1000")
+          messageMove("","scale-[200%]")
         }, 3400);
     },
     // ? return form 2nd option 
@@ -27,6 +31,8 @@ const GhostActions = (pacRef: React.RefObject<HTMLDivElement>) => [
         }, 2200);
         setTimeout(() => {
           pacRef.current?.classList.add("animate-fadeOut")
+          messageMove("duration-500","duration-1000")
+          messageMove("","scale-[200%]")
         }, 3300);
     },
     // ? return from 3rd option
@@ -40,6 +46,8 @@ const GhostActions = (pacRef: React.RefObject<HTMLDivElement>) => [
         }, 2200);
         setTimeout(() => {
           pacRef.current?.classList.add("animate-fadeOut")
+          messageMove("duration-500","duration-1000")
+          messageMove("","scale-[200%]")
         }, 3400);
     },
     // ? return from 4th option
@@ -57,6 +65,8 @@ const GhostActions = (pacRef: React.RefObject<HTMLDivElement>) => [
         }, 2500);
         setTimeout(() => {
           pacRef.current?.classList.add("animate-fadeOut")
+          messageMove("duration-500","duration-1000")
+          messageMove("","scale-[200%]")
         }, 3300);
     },
   ];

@@ -1,5 +1,5 @@
 import GhostActions from "./ghostFunctions";
-import ReturnActions from "./returnFunctions";
+import ReturnActions, { messageMove } from "./returnFunctions";
 
 const option = ["option1", "option2", "option3", "option4"];
 
@@ -17,6 +17,7 @@ export const handleAfterOptions = (
   pacRef: React.RefObject<HTMLDivElement>,
   correctOption: number,
   setShowCherry: React.Dispatch<React.SetStateAction<boolean>>,
+  setShowMessage: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const returnActions = ReturnActions(pacRef);
   const ghostActions = GhostActions(pacRef);
@@ -28,6 +29,7 @@ export const handleAfterOptions = (
       ghostActions[movIdx]();
     } else {
       setShowCherry(true);
+      setShowMessage(true);
     }
   }, 500);
   returnActions[movIdx]();
@@ -37,19 +39,21 @@ export const handleAfterOptions = (
       if(movIdx>0)
       {pacRef.current?.classList.remove("duration-500");
       pacRef.current?.classList.add("duration-1000");
+      messageMove("duration-500","duration-1000")
       }
       pacRef.current?.classList.remove(home[movIdx]);
+      messageMove(home[movIdx],"")
       if(movIdx===0){
         setTimeout(() => {
           pacRef.current?.classList.remove("-rotate-90")
-          pacRef.current?.classList.add("scale-x-[-1]");
+          pacRef.current?.classList.add("-scale-x-100");
         }, 500);
         setTimeout(() => {
           pacRef.current?.classList.remove("translate-x-[50px]")
+          messageMove("translate-x-[50px]","")
         }, 1000);
       }
-    
-  }
+    }
   }, 3500);
 };
 

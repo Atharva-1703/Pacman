@@ -17,6 +17,7 @@ const GameView = () => {
   const startOption2 = useRef(false);
   const startOption3 = useRef(false);
   const startOption4 = useRef(false);
+  const [showMessage, setShowMessage] = useState(false);
   const [showCherry, setShowCherry] = useState(false);
   const lastKeyPressTime = useRef<number | null>(null);
   const pacRef = useRef<HTMLDivElement | null>(null);
@@ -26,7 +27,7 @@ const GameView = () => {
     "translate-x-[250px]",
   ];
   const pathMaze = ["path-1", "path-2", "path-3"];
-  const correctOption = 0;
+  const correctOption = 1;
   let movIdx = 0;
   useEffect(() => {
     const stopListening = listenForArrowKeys((key) => {
@@ -53,6 +54,7 @@ const GameView = () => {
               movIdx,
               setShowCherry,
               correctOption,
+              setShowMessage,
             });
           } else if (startOption2.current) {
             handleOption2({
@@ -61,6 +63,7 @@ const GameView = () => {
               movIdx,
               setShowCherry,
               correctOption,
+              setShowMessage,
             });
           } else if (startOption3.current) {
             handleOption3({
@@ -69,6 +72,7 @@ const GameView = () => {
               movIdx,
               setShowCherry,
               correctOption,
+              setShowMessage,
             });
           } else if (startOption4.current) {
             handleOption4({
@@ -77,6 +81,7 @@ const GameView = () => {
               movIdx,
               setShowCherry,
               correctOption,
+              setShowMessage,
             });
           } else {
             handleCommonPath(key);
@@ -107,20 +112,48 @@ const GameView = () => {
     ) {
       if (movIdx === 0) {
         startOption1.current = true;
-        handleOption1({ key, pacRef, movIdx, setShowCherry, correctOption });
+        handleOption1({
+              key,
+              pacRef,
+              movIdx,
+              setShowCherry,
+              correctOption,
+              setShowMessage,
+            });
       }
       if (movIdx === 3) {
         startOption4.current = true;
-        handleOption4({ key, pacRef, movIdx, setShowCherry, correctOption });
+        handleOption4({
+              key,
+              pacRef,
+              movIdx,
+              setShowCherry,
+              correctOption,
+              setShowMessage,
+            });
       }
     } else if (pacRef.current && key === "ArrowUp" && movIdx < movePac.length) {
       if (movIdx === 1) {
         startOption2.current = true;
-        handleOption2({ key, pacRef, movIdx, setShowCherry, correctOption });
+        handleOption2({
+              key,
+              pacRef,
+              movIdx,
+              setShowCherry,
+              correctOption,
+              setShowMessage,
+            });
       }
       if (movIdx === 2) {
         startOption3.current = true;
-        handleOption3({ key, pacRef, movIdx, setShowCherry, correctOption });
+        handleOption3({
+              key,
+              pacRef,
+              movIdx,
+              setShowCherry,
+              correctOption,
+              setShowMessage,
+            });
       }
     }
   };
@@ -143,21 +176,26 @@ const GameView = () => {
 
       <div className="absolute left-[37px] top-[590px]">
       
+        <div id="message" className=" hidden">
+          {showMessage?<ImageComponent
+          src="/resources/images/yes.png"
+          alt="yes"
+          className="z-50 absolute -top-5 left-1 w-[34px] h-[34px]"
+        />:<ImageComponent
+        src="/resources/images/no.png"
+        alt="no"
+        className="z-10 absolute -top-4 -left-5 w-[45px] h-[45px]"
+      />}
+          
+        
+        </div>
+
         <div
           ref={pacRef}
           // id="pac"
-          className=" transition-all duration-500 ease-linear"
+          className=" transition-transform duration-500 ease-linear"
         >
-          {/* <ImageComponent
-          src="/resources/images/yes.png"
-          alt="yes"
-          className="absolute -top-5 left-1 w-[34px] h-[34px]"
-        />
-        <ImageComponent
-          src="/resources/images/no.png"
-          alt="no"
-          className="absolute -top-3 -left-5 w-[45px] h-[45px]"
-        /> */}
+          
           <ImageComponent
             src="/resources/images/pacman.png"
             alt="pac"

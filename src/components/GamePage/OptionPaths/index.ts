@@ -6,12 +6,20 @@ interface GameActionParams {
   pacRef: React.RefObject<HTMLDivElement>;
   movIdx: number;
   setShowCherry: React.Dispatch<React.SetStateAction<boolean>>;
-  correctOption:number
+  correctOption:number,
+  setShowMessage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 let cnt=0;
 
-export const handleOption1=({key,pacRef,movIdx,setShowCherry,correctOption}:GameActionParams)=>{
+export const handleOption1=({
+              key,
+              pacRef,
+              movIdx,
+              setShowCherry,
+              correctOption,
+              setShowMessage,
+            }:GameActionParams)=>{
     if(pacRef.current && key==="ArrowDown" && cnt===0 ){
       pacRef.current.classList.add('rotate-90')
       setTimeout(() => {
@@ -22,7 +30,7 @@ export const handleOption1=({key,pacRef,movIdx,setShowCherry,correctOption}:Game
     }
     if(pacRef.current && key==="ArrowLeft" && cnt===1){
       pacRef.current.classList.remove("rotate-90");
-      pacRef.current.classList.add("scale-x-[-1]");
+      pacRef.current.classList.add("-scale-x-100");
       setTimeout(() => {
         document.getElementById('opt1-2')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.remove("translate-x-[50px]");
@@ -31,20 +39,27 @@ export const handleOption1=({key,pacRef,movIdx,setShowCherry,correctOption}:Game
       }, 500);
     }
     if(pacRef.current && key==="ArrowDown" && cnt===2){
-      pacRef.current.classList.add("rotate-[-90deg]");
+      pacRef.current.classList.add("-rotate-90");
       setTimeout(() => {
         document.getElementById('opt1-3')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.remove("translate-y-[70px]");
         pacRef.current?.classList.add("translate-y-[140px]");
         cnt++;
-        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry);
+        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage);
       },500)
     }
   }
 
-export  const handleOption2=({key,pacRef,movIdx,setShowCherry,correctOption}:GameActionParams)=>{
+export  const handleOption2=({
+              key,
+              pacRef,
+              movIdx,
+              setShowCherry,
+              correctOption,
+              setShowMessage,
+            }:GameActionParams)=>{
     if(pacRef.current && key==="ArrowUp" && cnt===0 ){ 
-      pacRef.current.classList.add("rotate-[-90deg]")
+      pacRef.current.classList.add("-rotate-90")
       setTimeout(() => {
         document.getElementById('opt2-1')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-y-[-130px]");
@@ -52,20 +67,27 @@ export  const handleOption2=({key,pacRef,movIdx,setShowCherry,correctOption}:Gam
       }, 500);
     }
     if(pacRef.current && key==="ArrowLeft" && cnt===1 ){
-      pacRef.current.classList.remove("rotate-[-90deg]");
-      pacRef.current.classList.add("scale-x-[-1]");
+      pacRef.current.classList.remove("-rotate-90");
+      pacRef.current.classList.add("-scale-x-100");
       setTimeout(() => {
         document.getElementById('opt2-2')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.remove("translate-x-[130px]");
         pacRef.current?.classList.add("translate-x-[10px]");
         cnt++;
-        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry);
+        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage);
       }, 500);
       
     }
   }
   
-export  const handleOption3=({key,pacRef,movIdx,setShowCherry,correctOption}:GameActionParams)=>{
+export  const handleOption3=({
+              key,
+              pacRef,
+              movIdx,
+              setShowCherry,
+              correctOption,
+              setShowMessage,
+            }:GameActionParams)=>{
     if(pacRef.current && key==="ArrowUp" && cnt===0 ){
       pacRef.current.classList.add("-rotate-90")
       setTimeout(() => {  
@@ -81,12 +103,19 @@ export  const handleOption3=({key,pacRef,movIdx,setShowCherry,correctOption}:Gam
         pacRef.current?.classList.remove("translate-x-[190px]");
         pacRef.current?.classList.add("translate-x-[250px]");
         cnt++;
-        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry);
+        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage);
       }, 500);
     }
   }
 
-export  const handleOption4=({key,pacRef,movIdx,setShowCherry,correctOption}:GameActionParams)=>{
+export  const handleOption4=({
+              key,
+              pacRef,
+              movIdx,
+              setShowCherry,
+              correctOption,
+              setShowMessage,
+            }:GameActionParams)=>{
     if(pacRef.current && key==="ArrowDown" && cnt===0 ){
       pacRef.current.classList.add("rotate-90")
       setTimeout(() => {
@@ -101,7 +130,7 @@ export  const handleOption4=({key,pacRef,movIdx,setShowCherry,correctOption}:Gam
         document.getElementById('opt4-2')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-x-[290px]");
       cnt++;
-      handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry);
+      handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage);
       }, 500);
     }
   }

@@ -12,7 +12,7 @@ interface HomeViewProps {
 
 const HomeView: React.FC<HomeViewProps> = ({ handlePlay, handleStart }) => {
   return (
-    <div>
+    <div className="w-full h-full">
       <IntroComponent handleFunction={handlePlay}/>
 
       <ControlsComponent />

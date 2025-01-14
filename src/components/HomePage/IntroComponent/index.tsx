@@ -8,8 +8,9 @@ const IntroComponent = ({handleFunction}: {handleFunction: () => void}) => {
   return (
     <div
         id="background"
-        className="bg-[url(/resources/images/bg.png)] bg-175% w-full h-screen bg-no-repeat relative flex justify-center items-center  overflow-hidden bg-left-bottom transition-opacity duration-1000 ease-linear"
+        className="relative flex justify-center items-center w-full h-full transition-opacity duration-1000 ease-linear"
       >
+        <ImageComponent src="/resources/images/bgEdited.png" alt="bg" className=" w-full h-full  opacity-100 object-left" />
         
         <div
           id="title"

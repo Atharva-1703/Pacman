@@ -1,24 +1,31 @@
-import { useRef } from "react";
 import { handleAfterOptions } from "../ReturnAnimations/AfterOptions";
+
 
 interface GameActionParams {
   key: string;
   pacRef: React.RefObject<HTMLDivElement>;
-  movIdx: number;
+  movIdx: React.MutableRefObject<number>;
   setShowCherry: React.Dispatch<React.SetStateAction<boolean>>;
   correctOption:number,
   setShowMessage: React.Dispatch<React.SetStateAction<boolean>>
+  moveToNextQuestion:()=>void
 }
+
 
 let cnt=0;
 
+export const resetCnt = () => {
+  cnt = 0;
+  
+};
+
 export const handleOption1=({
               key,
-              pacRef,
+             pacRef,
               movIdx,
               setShowCherry,
               correctOption,
-              setShowMessage,
+              setShowMessage,moveToNextQuestion
             }:GameActionParams)=>{
     if(pacRef.current && key==="ArrowDown" && cnt===0 ){
       pacRef.current.classList.add('rotate-90')
@@ -45,18 +52,18 @@ export const handleOption1=({
         pacRef.current?.classList.remove("translate-y-[70px]");
         pacRef.current?.classList.add("translate-y-[140px]");
         cnt++;
-        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage);
+        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage,moveToNextQuestion);
       },500)
     }
   }
 
 export  const handleOption2=({
               key,
-              pacRef,
+             pacRef,
               movIdx,
               setShowCherry,
               correctOption,
-              setShowMessage,
+              setShowMessage,moveToNextQuestion
             }:GameActionParams)=>{
     if(pacRef.current && key==="ArrowUp" && cnt===0 ){ 
       pacRef.current.classList.add("-rotate-90")
@@ -74,19 +81,18 @@ export  const handleOption2=({
         pacRef.current?.classList.remove("translate-x-[130px]");
         pacRef.current?.classList.add("translate-x-[10px]");
         cnt++;
-        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage);
+        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage,moveToNextQuestion);
       }, 500);
-      
     }
   }
   
 export  const handleOption3=({
               key,
-              pacRef,
+             pacRef,
               movIdx,
               setShowCherry,
               correctOption,
-              setShowMessage,
+              setShowMessage,moveToNextQuestion
             }:GameActionParams)=>{
     if(pacRef.current && key==="ArrowUp" && cnt===0 ){
       pacRef.current.classList.add("-rotate-90")
@@ -103,18 +109,18 @@ export  const handleOption3=({
         pacRef.current?.classList.remove("translate-x-[190px]");
         pacRef.current?.classList.add("translate-x-[250px]");
         cnt++;
-        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage);
+        handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage,moveToNextQuestion);
       }, 500);
     }
   }
 
 export  const handleOption4=({
               key,
-              pacRef,
+             pacRef,
               movIdx,
               setShowCherry,
               correctOption,
-              setShowMessage,
+              setShowMessage,moveToNextQuestion
             }:GameActionParams)=>{
     if(pacRef.current && key==="ArrowDown" && cnt===0 ){
       pacRef.current.classList.add("rotate-90")
@@ -130,7 +136,7 @@ export  const handleOption4=({
         document.getElementById('opt4-2')?.classList.add("animate-fadeOut");
         pacRef.current?.classList.add("translate-x-[290px]");
       cnt++;
-      handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage);
+      handleAfterOptions(movIdx,pacRef,correctOption,setShowCherry,setShowMessage,moveToNextQuestion);
       }, 500);
     }
   }

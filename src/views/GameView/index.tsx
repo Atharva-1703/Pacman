@@ -1,163 +1,19 @@
-import { useEffect, useRef, useState } from "react";
 import PathMaze from "../../components/GamePage/PathMazeComponent";
 import QuestionCard from "../../components/GamePage/QuestionCard";
 import ImageComponent from "../../components/ImageComponent";
 import OptionCard from "../../components/GamePage/OptionCard";
 import UtilitiesCard from "../../components/GamePage/UtilitiesCard";
-import { listenForArrowKeys } from "../../components/GamePage/GetKeyComponent";
-import {
-  handleOption1,
-  handleOption2,
-  handleOption3,
-  handleOption4,
-} from "../../components/GamePage/OptionPaths";
+import { useEffect } from "react";
 
-const GameView = () => {
-  const startOption1 = useRef(false);
-  const startOption2 = useRef(false);
-  const startOption3 = useRef(false);
-  const startOption4 = useRef(false);
-  const [showMessage, setShowMessage] = useState(false);
-  const [showCherry, setShowCherry] = useState(false);
-  const lastKeyPressTime = useRef<number | null>(null);
-  const pacRef = useRef<HTMLDivElement | null>(null);
-  const movePac = [
-    "translate-x-[130px]",
-    "translate-x-[190px]",
-    "translate-x-[250px]",
-  ];
-  const pathMaze = ["path-1", "path-2", "path-3"];
-  const correctOption = 1;
-  let movIdx = 0;
-  useEffect(() => {
-    const stopListening = listenForArrowKeys((key) => {
-      const now = Date.now();
+interface GameViewProps {
+  showCherry: boolean;
+  showMessage: boolean;
+  pacRef: React.RefObject<HTMLDivElement>;
+  question: string;
+  options: string[];
+}
 
-      const timeDiff =
-        startOption1.current ||
-        startOption2.current ||
-        startOption3.current ||
-        startOption4.current
-          ? 1000 // Delay for specific paths
-          : 500;
-
-      if (
-        lastKeyPressTime.current === null ||
-        now - lastKeyPressTime.current >= timeDiff
-      ) {
-        lastKeyPressTime.current = now;
-        if (key) {
-          if (startOption1.current) {
-            handleOption1({
-              key,
-              pacRef,
-              movIdx,
-              setShowCherry,
-              correctOption,
-              setShowMessage,
-            });
-          } else if (startOption2.current) {
-            handleOption2({
-              key,
-              pacRef,
-              movIdx,
-              setShowCherry,
-              correctOption,
-              setShowMessage,
-            });
-          } else if (startOption3.current) {
-            handleOption3({
-              key,
-              pacRef,
-              movIdx,
-              setShowCherry,
-              correctOption,
-              setShowMessage,
-            });
-          } else if (startOption4.current) {
-            handleOption4({
-              key,
-              pacRef,
-              movIdx,
-              setShowCherry,
-              correctOption,
-              setShowMessage,
-            });
-          } else {
-            handleCommonPath(key);
-          }
-        }
-      }
-    });
-
-    return () => stopListening();
-  }, []);
-
-  const handleCommonPath = (key: string) => {
-    if (pacRef.current && key === "ArrowRight" && movIdx < movePac.length) {
-      if (movIdx > 0) {
-        pacRef.current.classList.remove(movePac[movIdx - 1]);
-      } else {
-        pacRef.current.classList.remove("translate-x-[50px]");
-      }
-      pacRef.current.classList.add(movePac[movIdx]);
-      document
-        .getElementById(pathMaze[movIdx])
-        ?.classList.add("animate-fadeOut");
-      movIdx++;
-    } else if (
-      pacRef.current &&
-      key === "ArrowDown" &&
-      movIdx <= movePac.length
-    ) {
-      if (movIdx === 0) {
-        startOption1.current = true;
-        handleOption1({
-              key,
-              pacRef,
-              movIdx,
-              setShowCherry,
-              correctOption,
-              setShowMessage,
-            });
-      }
-      if (movIdx === 3) {
-        startOption4.current = true;
-        handleOption4({
-              key,
-              pacRef,
-              movIdx,
-              setShowCherry,
-              correctOption,
-              setShowMessage,
-            });
-      }
-    } else if (pacRef.current && key === "ArrowUp" && movIdx < movePac.length) {
-      if (movIdx === 1) {
-        startOption2.current = true;
-        handleOption2({
-              key,
-              pacRef,
-              movIdx,
-              setShowCherry,
-              correctOption,
-              setShowMessage,
-            });
-      }
-      if (movIdx === 2) {
-        startOption3.current = true;
-        handleOption3({
-              key,
-              pacRef,
-              movIdx,
-              setShowCherry,
-              correctOption,
-              setShowMessage,
-            });
-      }
-    }
-  };
-
+const GameView: React.FC<GameViewProps> = ({showCherry,showMessage,pacRef,question,options}) => {
   useEffect(() => {
     if (pacRef.current) {
       pacRef.current.classList.add("translate-x-[50px]");
@@ -170,7 +26,7 @@ const GameView = () => {
 
       <UtilitiesCard />
 
-      <QuestionCard question="Largest animal on earth?" />
+      <QuestionCard question={question} />
 
       <PathMaze />
 
@@ -216,24 +72,24 @@ const GameView = () => {
       <OptionCard
         id="option1"
         optionClass=" top-[700px] left-[50px]"
-        option="Hippopotamus"
+        option={options[0]}
       />
       <OptionCard
         id="option2"
         optionClass=" top-[420px] left-[33px]"
-        option="Blue Whale"
+        option={options[1]}
       />
       <OptionCard
         id="option3"
         optionClass=" top-[430px] right-[20px]"
-        option="Shark"
+        option={options[2]}
         imageInvert
       />
 
       <OptionCard
         id="option4"
         optionClass=" top-[740px] right-[60px]"
-        option="Elephant"
+        option={options[3]}
         imageInvert
       />
     </div>
